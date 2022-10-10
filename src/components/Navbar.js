@@ -6,18 +6,15 @@ export class NavBar extends Component {
       <header>
         <nav>
           <ul>
-            <li>
-              <a href='#all'>All</a>
-            </li>
-            <li>
-              <a href='#clothes'>Clothes</a>
-            </li>
-            <li>
-              <a href='#tech'>Tech</a>
-            </li>
-            <li className='active'>
-              <a href='#buy'>Buy</a>
-            </li>
+            {this.props.data.map(({ name }) => {
+              return (
+                <li key={name}>
+                  <a href='#all' onClick={this.props.passedHandlePickCategory}>
+                    {name}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </header>

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Query } from 'react-apollo';
-import GET_PRODUCTS from '../gql/queries';
 
 export class PLP extends Component {
   render() {
@@ -8,7 +6,6 @@ export class PLP extends Component {
       <main>
         <div>
           <p>Product listing page2</p>
-          <Query query={GET_PRODUCTS}></Query>
         </div>
       </main>
     );

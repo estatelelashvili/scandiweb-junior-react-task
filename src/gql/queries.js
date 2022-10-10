@@ -1,6 +1,13 @@
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { gql } from '@apollo/client';
 
-const GET_PRODUCTS = gql`
+const localGraphQL = 'http://localhost:4000/graphql';
+export const client = new ApolloClient({
+  uri: localGraphQL,
+  cache: new InMemoryCache(),
+});
+
+export const GET_PRODUCTS = gql`
   query GetData {
     categories {
       name
@@ -22,7 +29,9 @@ const GET_PRODUCTS = gql`
           }
         }
         prices {
-          currency
+          currency {
+            label
+          }
           amount
         }
         brand
