@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
+import { Product } from './Product';
 
 export class PLP extends Component {
+  state = {
+    initialCategory: '',
+  };
   render() {
-    return (
-      <main>
-        <div>
-          <p>Product listing page2</p>
-        </div>
-      </main>
-    );
+    return <Product data={this.props.filteredData} />;
   }
 }

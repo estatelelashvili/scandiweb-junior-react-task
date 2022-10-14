@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { gql } from '@apollo/client';
 import { GET_PRODUCTS } from '../gql/queries';
 import { client } from '../gql/queries';
 import { NavBar } from './Navbar';
+import { PLP } from './PLP';
 
 export class FrontStore extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export class FrontStore extends Component {
   }
   state = {
     data: [],
-    categoryName: '',
+    categoryName: 'all',
   };
 
   handlePickCategory = (event) => {
@@ -37,18 +38,19 @@ export class FrontStore extends Component {
     this.getProducts();
   }
   render() {
-    console.log(
-      this.state.data.filter(
-        (category) => category.name === this.state.categoryName
-      )
-    );
-
     return (
-      <NavBar
-        data={this.state.data}
-        category={this.state.categoryName}
-        passedHandlePickCategory={this.handlePickCategory}
-      />
+      <Fragment>
+        <NavBar
+          data={this.state.data}
+          category={this.state.categoryName}
+          passedHandlePickCategory={this.handlePickCategory}
+        />
+        <PLP
+          filteredData={this.state.data.filter(
+            (category) => category.name === this.state.categoryName
+          )}
+        />
+      </Fragment>
     );
   }
 }
