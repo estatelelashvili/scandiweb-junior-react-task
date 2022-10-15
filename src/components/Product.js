@@ -1,6 +1,17 @@
 import React, { Component, Fragment } from 'react';
-
+import { PDP } from './PDP';
 export class Product extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isShown: false,
+    };
+  }
+
+  togglePDP() {
+    this.setState({ isShown: !this.state.isShown });
+  }
   render() {
     return (
       <Fragment>
@@ -9,7 +20,15 @@ export class Product extends Component {
             <div key={i}>
               <h1 key={i}>{name}</h1>
               {products.map((product) => (
-                <p key={product.id}>{product.name}</p>
+                <div key={product.id}>
+                  <p key={product.id}>{product.name}</p>
+                  <button onClick={() => this.togglePDP()}>Details</button>
+                  <PDP
+                    product={product}
+                    togglePDP={() => this.togglePDP()}
+                    isShown={this.state.isShown}
+                  />
+                </div>
               ))}
             </div>
           );
