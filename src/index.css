@@ -35,5 +35,30 @@ nav  ul  li  a:hover {
 }
 
 .active {
+  margin-top: 15px;
+  margin-right: 20px;
   float:right;
+  cursor: pointer;
+}
+
+/* SWATCH */
+.swatch-attribute{
+  width: 20px;
+  height: 20px;
+  border: 1px solid silver;
+}
+
+.text-attribute{
+  color: black;
+  width: fit-content;
+  height: fit-content;
+  border: 1px solid silver;
+}
+
+.mini-cart{
+  background-color: antiquewhite;
+  width: 300px;
+  height: fit-content;
+  float: right;
+  margin-right: 20px;
 }

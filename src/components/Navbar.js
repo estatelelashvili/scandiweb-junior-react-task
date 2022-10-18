@@ -15,6 +15,16 @@ export class NavBar extends Component {
                 </li>
               );
             })}
+            <li className='active'>
+              {/* <a></a>
+               */}
+              <img
+                className='cart-icon'
+                src=''
+                alt='not found'
+                onClick={() => this.props.toggleMiniCart()}
+              />
+            </li>
           </ul>
         </nav>
       </header>

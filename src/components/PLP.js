@@ -6,6 +6,25 @@ export class PLP extends Component {
     initialCategory: '',
   };
   render() {
-    return <Product data={this.props.filteredData} />;
+    return (
+      <div>
+        {this.props.filteredData.map(({ name, products }) => {
+          return (
+            <div key={name}>
+              <h1>{name}</h1>
+              {products.map((product) => (
+                <Product
+                  key={product.id}
+                  data={product}
+                  MyBag={this.props.MyBag}
+                  onAdd={this.props.onAdd}
+                  // pickAttributes={this.props.pickAttributes}
+                />
+              ))}
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 }
