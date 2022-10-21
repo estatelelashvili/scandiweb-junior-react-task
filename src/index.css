@@ -55,6 +55,13 @@ nav  ul  li  a:hover {
   border: 1px solid silver;
 }
 
+.selected-attribute{
+  color: green;
+  width: fit-content;
+  height: fit-content;
+  border: 2px solid red;
+}
+
 .mini-cart{
   background-color: antiquewhite;
   width: 300px;

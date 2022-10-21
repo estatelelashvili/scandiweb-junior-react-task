@@ -22,7 +22,7 @@ export class PDP extends Component {
     }));
   }
 
-  pickAttributes = (attribute, value) => {
+  pickAttributes = (attribute, value, index, attributes) => {
     // const currencyMap = { USD: '$', AUD: 'A$', RUB: '₽', GBP: '£', JPY: '¥' };
     this.setState({
       obj: {
@@ -30,7 +30,11 @@ export class PDP extends Component {
         // price: cost,
         // symbol: currencyMap[currency],
         ...this.state.obj,
-        [attribute]: value,
+        [index]: {
+          ...this.state.obj.index,
+          [attribute]: value,
+        },
+        properties: attributes,
       },
     });
   };
@@ -48,14 +52,15 @@ export class PDP extends Component {
   // };
 
   render() {
-    localStorage.setItem('CartContent', JSON.stringify(this.props.MyBag));
-    console.log(JSON.parse(localStorage.getItem('CartContent')) || []);
+    // localStorage.setItem('CartContent', JSON.stringify(this.props.MyBag));
+    // console.log(JSON.parse(localStorage.getItem('CartContent')) || []);
+
     return this.props.isShown ? (
       <div>
         <button onClick={() => this.props.togglePDP()}>X</button>
         <p onClick={this.handleEvent}>{this.props.product.id}</p>
         {this.props.product.attributes.map(
-          ({ ProductId, name, type, items }) => {
+          ({ ProductId, name, type, items }, j) => {
             return (
               <div key={ProductId}>
                 <p>{name}</p>
@@ -63,7 +68,14 @@ export class PDP extends Component {
                   return type === 'text' ? (
                     <div key={id}>
                       <p
-                        onClick={() => this.pickAttributes(name, value)}
+                        onClick={() =>
+                          this.pickAttributes(
+                            name,
+                            value,
+                            j,
+                            this.props.product.attributes
+                          )
+                        }
                         className='text-attribute'
                       >
                         {value}
@@ -73,7 +85,14 @@ export class PDP extends Component {
                   ) : (
                     <div key={id}>
                       <p
-                        onClick={() => this.pickAttributes(name, value)}
+                        onClick={() =>
+                          this.pickAttributes(
+                            name,
+                            value,
+                            j,
+                            this.props.product.attributes
+                          )
+                        }
                         className='swatch-attribute'
                         style={{ background: value }}
                       ></p>

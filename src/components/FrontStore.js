@@ -23,7 +23,7 @@ export class FrontStore extends Component {
 
   toggleMiniCart() {
     this.setState({ MiniCartIsHidden: !this.state.MiniCartIsHidden });
-    console.log(this.state.MiniCartIsHidden);
+    // console.log(this.state.MiniCartIsHidden);
   }
 
   handleAddItem = (item, name, cost, currency) => {
@@ -74,7 +74,10 @@ export class FrontStore extends Component {
           passedHandlePickCategory={this.handlePickCategory}
           toggleMiniCart={this.toggleMiniCart}
         />
-        <MiniCart MiniCartIsHidden={this.state.MiniCartIsHidden} />
+        <MiniCart
+          MiniCartIsHidden={this.state.MiniCartIsHidden}
+          MyBag={this.state.MyBag}
+        />
         <PLP
           filteredData={this.state.data.filter(
             (category) => category.name === this.state.categoryName
