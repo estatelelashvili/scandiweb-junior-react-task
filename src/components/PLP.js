@@ -18,6 +18,7 @@ export class PLP extends Component {
                   data={product}
                   MyBag={this.props.MyBag}
                   onAdd={this.props.onAdd}
+                  onRemove={this.props.onRemove}
                   // pickAttributes={this.props.pickAttributes}
                 />
               ))}

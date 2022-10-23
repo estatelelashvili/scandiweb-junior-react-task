@@ -2,6 +2,10 @@ import React, { Component, Fragment } from 'react';
 
 export class MiniCart extends Component {
   render() {
+    const CURR = 'USD';
+    let TOTAL = this.props.MyBag.map(
+      (item) => item.prices.filter((x) => x.currency.label === CURR)[0].amount
+    ).reduce((prev, curr) => prev + curr, 0);
     const uniqueProducts = Array.from(
       new Set(this.props.MyBag.map((object) => JSON.stringify(object)))
     ).map((string) => JSON.parse(string));
@@ -33,11 +37,18 @@ export class MiniCart extends Component {
     ) : (
       <div className='mini-cart'>
         {uniqueProducts.map(
-          ({ productName, price, symbol, properties, ...rest }, k) => (
+          ({ productName, prices, properties, ...rest }, k) => (
             <div key={k}>
               <p>{productName}</p>
               <p>
-                {symbol} {price}
+                {
+                  prices.filter((price) => price.currency.label === CURR)[0]
+                    .currency.label
+                }{' '}
+                {
+                  prices.filter((price) => price.currency.label === CURR)[0]
+                    .amount
+                }
               </p>
               <p>
                 Count:
@@ -48,6 +59,16 @@ export class MiniCart extends Component {
                   ).length
                 }
               </p>
+              <button
+                onClick={() =>
+                  this.props.onAdd(uniqueProducts[k], productName, prices)
+                }
+              >
+                +
+              </button>
+              <button onClick={() => this.props.onRemove(uniqueProducts[k], k)}>
+                -
+              </button>
               {properties
                 ? properties.map(({ ProductId, name, type, items }, j) => (
                     <Fragment key={j}>
@@ -82,6 +103,7 @@ export class MiniCart extends Component {
             </div>
           )
         )}
+        <p>Total {TOTAL}</p>
       </div>
     );
   }

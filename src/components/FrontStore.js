@@ -26,17 +26,35 @@ export class FrontStore extends Component {
     // console.log(this.state.MiniCartIsHidden);
   }
 
-  handleAddItem = (item, name, cost, currency) => {
-    const currencyMap = { USD: '$', AUD: 'A$', RUB: '₽', GBP: '£', JPY: '¥' };
+  handleAddItem = (item, name, costs) => {
+    // const currencyMap = { USD: '$', AUD: 'A$', RUB: '₽', GBP: '£', JPY: '¥' };
     item.productName = name;
-    item.price = cost;
-    item.symbol = currencyMap[currency];
+    item.prices = costs;
+    // item.symbol = currencyMap[currency];
 
     let allProducts = [...this.state.MyBag];
 
     allProducts.push(item);
     this.setState({ MyBag: allProducts });
     // localStorage.setItem('CartContent', JSON.stringify(this.state.MyBag));
+  };
+
+  handleRemoveItem = (item, index2) => {
+    let allProducts = [...this.state.MyBag];
+    // let index = allProducts.indexOf(item);
+    // let index = JSON.stringify(allProducts).indexOf(JSON.stringify(item));
+    const isMatch = (element) =>
+      JSON.stringify(element) === JSON.stringify(item);
+    let index = allProducts.findLastIndex(isMatch);
+    if (index > -1) {
+      allProducts.splice(index, 1);
+      // allProducts[index] = undefined;
+    }
+
+    // console.log(index);
+    // allProducts = allProducts.filter((element) => element !== undefined);
+
+    this.setState({ MyBag: allProducts });
   };
 
   handlePickCategory = (event) => {
@@ -77,6 +95,8 @@ export class FrontStore extends Component {
         <MiniCart
           MiniCartIsHidden={this.state.MiniCartIsHidden}
           MyBag={this.state.MyBag}
+          onAdd={this.handleAddItem}
+          onRemove={this.handleRemoveItem}
         />
         <PLP
           filteredData={this.state.data.filter(
@@ -85,6 +105,7 @@ export class FrontStore extends Component {
           orders={this.state.orders}
           MyBag={this.state.MyBag}
           onAdd={this.handleAddItem}
+          onRemove={this.handleRemoveItem}
           // pickAttributes={this.pickAttributes}
         />
       </Fragment>

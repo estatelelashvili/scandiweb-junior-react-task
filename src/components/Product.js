@@ -23,6 +23,7 @@ export class Product extends Component {
           togglePDP={() => this.togglePDP()}
           isShown={this.state.isShown}
           onAdd={this.props.onAdd}
+          onRemove={this.props.onRemove}
           MyBag={this.props.MyBag}
           // pickAttributes={this.props.pickAttributes}
         />

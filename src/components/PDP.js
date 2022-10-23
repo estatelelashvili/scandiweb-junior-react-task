@@ -26,9 +26,6 @@ export class PDP extends Component {
     // const currencyMap = { USD: '$', AUD: 'A$', RUB: '₽', GBP: '£', JPY: '¥' };
     this.setState({
       obj: {
-        // productName: name,
-        // price: cost,
-        // symbol: currencyMap[currency],
         ...this.state.obj,
         [index]: {
           ...this.state.obj.index,
@@ -38,18 +35,6 @@ export class PDP extends Component {
       },
     });
   };
-  // pickAttributes = (name, cost, currency, attribute, value) => {
-  //   const currencyMap = { USD: '$', AUD: 'A$', RUB: '₽', GBP: '£', JPY: '¥' };
-  //   this.setState({
-  //     obj: {
-  //       productName: name,
-  //       price: cost,
-  //       symbol: currencyMap[currency],
-  //       ...this.state.obj,
-  //       [attribute]: value,
-  //     },
-  //   });
-  // };
 
   render() {
     // localStorage.setItem('CartContent', JSON.stringify(this.props.MyBag));
@@ -108,16 +93,14 @@ export class PDP extends Component {
             this.props.onAdd(
               this.state.obj,
               this.props.product.id,
-              this.props.product.prices.filter(
-                (x) => x.currency.label === 'USD'
-              )[0].amount,
-              this.props.product.prices.filter(
-                (x) => x.currency.label === 'USD'
-              )[0].currency.label
+              this.props.product.prices
             )
           }
         >
           buy
+        </button>
+        <button onClick={() => this.props.onRemove(this.state.obj)}>
+          sell
         </button>
       </div>
     ) : (
