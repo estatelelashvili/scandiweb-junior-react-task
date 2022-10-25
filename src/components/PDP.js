@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import CarouselVertical from './Carousel/CarouselVertical';
 
 export class PDP extends Component {
   constructor(props) {
@@ -90,7 +91,10 @@ export class PDP extends Component {
           X
         </button>
         <p onClick={this.handleEvent}>{this.props.product.id}</p>
-        <img className='PDP-gallery' src={this.props.product.gallery[0]} />
+        {/* <img className='PDP-gallery' src={this.props.product.gallery[0]} /> */}
+        <div className='cartIconPDP'>
+          <CarouselVertical data={this.props.product.gallery} />
+        </div>
         {this.props.product.attributes.map(
           ({ ProductId, name, type, items }, j) => {
             return (
