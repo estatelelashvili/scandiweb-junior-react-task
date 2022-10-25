@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-
+import CarouselHorizontal from './Carousel/CarouselHorizontal';
 export class MiniCart extends Component {
   render() {
     const CURR = 'USD';
@@ -21,9 +21,9 @@ export class MiniCart extends Component {
         elements.map((element) => Object.keys(element).map((keys) => keys))
       );
 
-    const values = testItems.map((item) =>
-      Object.keys(item).map((key) => item[key])
-    );
+    // const values = testItems.map((item) =>
+    //   Object.keys(item).map((key) => item[key])
+    // );
     const DeeperValues = testItems
       .map((item) => Object.keys(item).map((key) => item[key]))
       .map((elements) =>
@@ -32,14 +32,22 @@ export class MiniCart extends Component {
         )
       );
 
+    // console.log(this.props.productAttributes);
+    console.log(this.props.MyBag);
+
     return this.props.MiniCartIsHidden ? (
       ''
     ) : (
       <div className='mini-cart'>
         {uniqueProducts.map(
-          ({ productName, prices, properties, ...rest }, k) => (
+          ({ productName, prices, imgArr, properties, ...rest }, k) => (
             <div key={k}>
               <p>{productName}</p>
+              {/* <img className='mini-cart-img' src={imgArr[0]} /> */}
+              <div className='carouselCart'>
+                <CarouselHorizontal data={imgArr} />
+              </div>
+              {/* {console.log(imgArr[0])} */}
               <p>
                 {
                   prices.filter((price) => price.currency.label === CURR)[0]
@@ -61,12 +69,17 @@ export class MiniCart extends Component {
               </p>
               <button
                 onClick={() =>
-                  this.props.onAdd(uniqueProducts[k], productName, prices)
+                  this.props.onAdd(
+                    uniqueProducts[k],
+                    productName,
+                    prices,
+                    imgArr
+                  )
                 }
               >
                 +
               </button>
-              <button onClick={() => this.props.onRemove(uniqueProducts[k], k)}>
+              <button onClick={() => this.props.onRemove(uniqueProducts[k])}>
                 -
               </button>
               {properties
@@ -89,11 +102,20 @@ export class MiniCart extends Component {
                           </div>
                         ) : (
                           <div key={id}>
-                            <p
-                              key={i}
-                              className='swatch-attribute'
-                              style={{ background: value }}
-                            ></p>
+                            {+keys[k][j] === j &&
+                            DeeperValues[k][j][0] === value ? (
+                              <p
+                                key={i}
+                                className='selected-attribute-swatch'
+                                style={{ background: value }}
+                              ></p>
+                            ) : (
+                              <p
+                                key={i}
+                                className='swatch-attribute'
+                                style={{ background: value }}
+                              ></p>
+                            )}
                           </div>
                         );
                       })}

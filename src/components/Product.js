@@ -12,11 +12,14 @@ export class Product extends Component {
   togglePDP() {
     this.setState({ isShown: !this.state.isShown });
   }
+
   render() {
     const product = this.props.data;
     return (
-      <div>
+      <div key={product.id} className='product-card'>
+        <img className='product-thumbnail' src={product.gallery[0]} />
         <p>{product.name}</p>
+        <p>$ Money</p>
         <button onClick={() => this.togglePDP()}>Details</button>
         <PDP
           product={product}
@@ -25,7 +28,7 @@ export class Product extends Component {
           onAdd={this.props.onAdd}
           onRemove={this.props.onRemove}
           MyBag={this.props.MyBag}
-          // pickAttributes={this.props.pickAttributes}
+          retrieveSelectedProduct={this.props.retrieveSelectedProduct}
         />
       </div>
     );

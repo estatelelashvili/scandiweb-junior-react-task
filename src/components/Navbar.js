@@ -16,8 +16,6 @@ export class NavBar extends Component {
               );
             })}
             <li className='active'>
-              {/* <a></a>
-               */}
               <img
                 className='cart-icon'
                 src=''
