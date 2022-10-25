@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './CarouselVertical.css';
-import alterImg from '../images/noImage.png';
+import alterImg from '../../images/noImage.png';
 
 class Slide extends Component {
   render() {
