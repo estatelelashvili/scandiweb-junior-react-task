@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import "./CarouselVertical.css";
-import alterImg from "../images/noImage.png";
+import React, { Component } from 'react';
+import './CarouselVertical.css';
+import alterImg from '../images/noImage.png';
 
 class Slide extends Component {
   render() {
     return (
-      <div className="parent">
+      <div className='parent'>
         {this.props.data.map((s, index) => (
           <div key={index}>
             <img
-              className="miniImg"
+              className='miniImg'
               onClick={() => this.props.getIndex(s, index)}
-              id="imgTag"
+              id='imgTag'
               src={s}
-              alt="not found text"
+              alt='not found text'
             />
           </div>
         ))}
@@ -45,17 +45,17 @@ class CarouselVertical extends Component {
 
   render() {
     return (
-      <div className="container-1">
+      <div className='container-1'>
         <Slide
           getIndex={(s, i) => this.getIndex(s, i)}
           data={this.props.data}
         />
-        <div className="child-1">
+        <div className='child-1'>
           <img
-            className="mainImg"
+            className='mainImg'
             src={this.state.src}
             onError={this.handleImageErrored.bind(this)}
-            alt="not found text"
+            alt='not found text'
           />
         </div>
       </div>
