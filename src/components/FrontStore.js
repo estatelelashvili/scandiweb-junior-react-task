@@ -14,10 +14,12 @@ export class FrontStore extends Component {
   }
   state = {
     data: [],
-    categoryName: 'all',
+    categoryName: '',
+    SelectedCurrency: '',
     // MyBag: [],
     MyBag: JSON.parse(localStorage.getItem('CartContent')) || [],
     MiniCartIsHidden: true,
+    currencySymbol: '$',
   };
 
   toggleMiniCart() {
@@ -83,9 +85,35 @@ export class FrontStore extends Component {
       .then((result) => {
         this.setState({
           data: result.data.categories,
+          categoryName: result.data.categories.map(
+            (category) => category.name
+          )[0],
+          SelectedCurrency: result.data.categories
+            .map(({ name, products }) =>
+              products.map((product) =>
+                product.prices.map((price) => price.currency.label)
+              )
+            )
+            .map((item) => item[0])[0][0],
+          // SelectedCurrency:
         });
       });
   }
+
+  SelectCurrency(arg) {
+    const currencySymbolMap = {
+      USD: '$',
+      AUD: 'A$',
+      RUB: '₽',
+      GBP: '£',
+      JPY: '¥',
+    };
+    this.setState({
+      SelectedCurrency: arg,
+      currencySymbol: currencySymbolMap[arg],
+    });
+  }
+
   componentDidMount() {
     this.getProducts();
     // localStorage.setItem('CartItems', JSON.stringify({ total: 999 }));
@@ -98,9 +126,13 @@ export class FrontStore extends Component {
       <Fragment>
         <NavBar
           data={this.state.data}
+          filteredData={this.state.data.filter(
+            (category) => category.name === this.state.categoryName
+          )}
           category={this.state.categoryName}
           passedHandlePickCategory={this.handlePickCategory}
           toggleMiniCart={this.toggleMiniCart}
+          SelectCurrency={(e) => this.SelectCurrency(e)}
         />
         {/* <MiniCart
           MiniCartIsHidden={this.state.MiniCartIsHidden}
@@ -117,6 +149,7 @@ export class FrontStore extends Component {
           onAdd={this.handleAddItem}
           onRemove={this.handleRemoveItem}
           MiniCartIsHidden={this.state.MiniCartIsHidden}
+          SelectedCurrency={this.state.SelectedCurrency}
         />
       </Fragment>
     );

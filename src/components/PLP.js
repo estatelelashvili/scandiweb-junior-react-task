@@ -20,12 +20,13 @@ export class PLP extends Component {
       <div>
         {this.props.filteredData.map(({ name, products }) => {
           return (
-            <div key={name}>
+            <div key={name} className='minicart-parent-container'>
               <MiniCart
                 MiniCartIsHidden={this.props.MiniCartIsHidden}
                 MyBag={this.props.MyBag}
                 onAdd={this.props.onAdd}
                 onRemove={this.props.onRemove}
+                SelectedCurrency={this.props.SelectedCurrency}
                 // productAttributes={this.state.selectedProductAttributes}
               />
               <h1>{name}</h1>

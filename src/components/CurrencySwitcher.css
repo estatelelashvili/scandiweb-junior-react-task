@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+
+.currency-sign {
+  background: whitesmoke;
+  border: none;
+  font-weight: bolder;
+  padding: 5px;
+  margin: 5px;
+  float: right;
+  position: absolute;
+  top: 0%;
+  right: 12%;
+  width: 41px;
+  height: 40px;
+}
+
+form, select, option{
+  border:0px;
+  outline:0px;
+  font-weight: bolder;
+}

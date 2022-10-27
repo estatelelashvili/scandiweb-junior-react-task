@@ -1,0 +1,234 @@
+.allWrapper {
+  padding: 5px;
+  position: fixed;
+  position: absolute;
+  background-color: #eee;
+  right: 4%;
+  top: 1%;
+  width: 245px;
+  height: auto;
+  max-height: 70%;
+  font-size: 8px;
+  z-index: 10;
+  overflow: auto;
+}
+
+.cartWrapper {
+  background-color: white;
+  display: grid;
+  grid-template-columns: 2.2fr 1fr 1fr;
+  margin-top: 1em;
+  padding-bottom: 2em;
+  grid-column: 1/4;
+}
+
+.cartWrapper > div {
+  padding: 5px;
+}
+
+.attributeContainer {
+  display: flex;
+  justify-content: space-between;
+  grid-column: 1/4;
+  padding: 2px 25px 2px 15px !important;
+  margin: 1px !important;
+}
+
+.attributeTitle {
+  color: blanchedalmond;
+  background-color: rgb(56, 55, 55);
+  display: flex;
+  border: darkgrey 1px solid;
+  align-self: start;
+}
+
+.attributeContainerItems {
+  border: darkgrey 1px solid;
+}
+.attributeContainerItems:hover {
+  color: white;
+  background-color: black;
+}
+
+.productBrand {
+  display: flex;
+  order: 1;
+  grid-column: 1/4;
+  margin-bottom: -40px;
+  font-size: 10px;
+
+  text-transform: capitalize;
+}
+
+.productName {
+  grid-column: 1/4;
+  margin-bottom: -50px;
+  font-size: 10px;
+  text-transform: capitalize;
+  order: 2;
+  display: flex;
+  justify-content: flex-start;
+  align-self: end;
+}
+
+.itemPrice {
+  order: 3;
+  grid-column: 1/2;
+  margin-top: 55px;
+  margin-bottom: -20px;
+  display: flex;
+  font-size: 10px;
+}
+
+.cartIcon {
+  background-color: yellowgreen;
+  order: 5;
+  display: flex;
+  width: 80px;
+  height: 80px;
+  grid-row-start: span 2;
+  border: 1px solid silver;
+}
+
+.trioBtnNum {
+  order: 4;
+  display: flex;
+  flex-direction: column;
+}
+
+.plusBTN {
+  align-self: flex-start;
+  margin: -5px 0 10px 25px !important;
+  text-align: center;
+}
+
+.itemCounter {
+  margin: 3px -6px 3px 18px !important;
+}
+.minusBTN {
+  font-size: 12px;
+  font-weight: bolder;
+  text-align: center;
+  align-self: flex-end;
+  margin: 15px 0 -8px 0 !important;
+}
+
+.swatchBoxGrid {
+  width: 15px;
+  height: 15px;
+  justify-items: self-start;
+  border: silver 1px solid;
+}
+
+.swatchBoxGrid:hover {
+  border: 1px solid silver !important;
+  opacity: 0.7;
+}
+
+.buttonManagment {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.viewBagBTN {
+  background-color: rgb(232, 240, 232);
+  padding: 5px;
+  font-weight: bolder;
+  font-size: 8px;
+  text-transform: uppercase;
+  color: black;
+  border: none;
+  width: 30%;
+  border: silver 1px solid;
+}
+
+.viewBagBTN:hover {
+  cursor: pointer;
+  color: white;
+  background-color: rgb(51, 45, 45);
+  border: silver 1px solid;
+}
+
+.checkOutBTN {
+  background-color: rgb(84, 139, 84);
+  padding: 5px;
+  font-weight: bolder;
+  font-size: 8px;
+  text-transform: uppercase;
+  color: white;
+  border: none;
+  width: 30%;
+}
+
+.checkOutBTN:hover {
+  cursor: pointer;
+  color: lightgrey;
+  background-color: seagreen;
+  border: silver 1px solid;
+}
+
+.cartImg {
+  padding: 5px;
+  margin: 5px;
+  float: right;
+  position: absolute;
+  top: 2%;
+  right: 5%;
+  width: 30px;
+  height: 30px;
+}
+
+.badge {
+  padding: 1px;
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  background-color: black;
+  border-radius: 50%;
+  color: aliceblue;
+  font-size: 10px;
+  text-align: center;
+  right: 5%;
+}
+
+.myBagMC {
+  display: flex;
+  align-self: start;
+  text-transform: none;
+  margin-left: 10px;
+  font-size: 12px;
+  font-weight: bolder !important;
+}
+
+.totalAmount {
+  display: flex;
+  margin: 10px 0 18px 0;
+}
+
+.amountTitle {
+  align-self: start;
+  text-transform: none;
+  margin-left: 10px;
+  font-size: 12px;
+  font-weight: bolder !important;
+}
+.amountPrice {
+  font-size: 12px;
+  margin-left: 110px;
+  margin-right: 10px;
+  align-self: end;
+}
+
+hr.lineRC {
+  width: 95%;
+  margin-top: 15px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  grid-column: 1/4;
+  border-top: 1px solid #ddd;
+}
+
+
+.mini-cart-container{
+  position: relative;
+}
