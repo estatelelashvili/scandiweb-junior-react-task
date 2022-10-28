@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { PDP } from './PDP';
 import productLogo from '../images/cartBuy.png';
-// import productLogo from '../images/cartBuy.png';
 
 export class Product extends Component {
   constructor(props) {
@@ -65,6 +64,7 @@ export class Product extends Component {
           currencySymbol={this.props.currencySymbol}
           toggleModal={this.props.toggleModal}
           toggleOutOfStockModal={this.props.toggleOutOfStockModal}
+          toggleAddModal={this.props.toggleAddModal}
         />
       </div>
     );

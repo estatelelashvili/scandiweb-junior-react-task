@@ -8,13 +8,18 @@ export class PLP extends Component {
     super(props);
     this.toggleModal = this.toggleModal.bind(this);
     this.toggleOutOfStockModal = this.toggleOutOfStockModal.bind(this);
+    this.toggleAddModal = this.toggleAddModal.bind(this);
   }
 
   state = {
     modalIsShown: false,
     outOfStockPopUpIsShown: false,
+    addModalIsShown: false,
   };
 
+  toggleAddModal() {
+    this.setState({ addModalIsShown: !this.state.addModalIsShown });
+  }
   toggleModal() {
     this.setState({ modalIsShown: !this.state.modalIsShown });
   }
@@ -41,6 +46,19 @@ export class PLP extends Component {
           ) : (
             ''
           )}
+          {this.state.addModalIsShown ? (
+            <div className='modal-PLP'>
+              <button
+                className='close-btnPDP-inner'
+                onClick={() => this.toggleAddModal()}
+              >
+                &#10060;
+              </button>
+              <p>Product is added to cart!</p>
+            </div>
+          ) : (
+            ''
+          )}
           {this.state.outOfStockPopUpIsShown ? (
             <div className='modal-PLP'>
               <button
@@ -49,7 +67,7 @@ export class PLP extends Component {
               >
                 &#10060;
               </button>
-              <p>Sorry, this product is curently unavailable!</p>
+              <p>Sorry, product is out of stock!</p>
             </div>
           ) : (
             ''
@@ -66,7 +84,6 @@ export class PLP extends Component {
                 SelectedCurrency={this.props.SelectedCurrency}
                 currencySymbol={this.props.currencySymbol}
                 toggleMiniCart={this.props.toggleMiniCart}
-                // productAttributes={this.state.selectedProductAttributes}
               />
               <h1 className='categoryName'>{name}</h1>
               <div className='cards_wrap'>
@@ -81,8 +98,7 @@ export class PLP extends Component {
                     currencySymbol={this.props.currencySymbol}
                     toggleModal={this.toggleModal}
                     toggleOutOfStockModal={this.toggleOutOfStockModal}
-
-                    // retrieveSelectedProduct={this.retrieveSelectedProduct}
+                    toggleAddModal={this.toggleAddModal}
                   />
                 ))}
               </div>

@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react';
-
+import React, { Component } from 'react';
 import { Cart } from './Cart';
 
 export class MiniCart extends Component {

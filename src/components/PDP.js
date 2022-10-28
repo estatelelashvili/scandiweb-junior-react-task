@@ -53,9 +53,7 @@ export class PDP extends Component {
         (Object.entries(rest).length === 0 ||
           Object.entries(rest).length !== propertyHolder)
       ) {
-        // alert('Please select all options!');
         this.props.toggleModal();
-        // this.showModal();
       } else {
         this.props.onAdd(
           this.state.obj,
@@ -64,6 +62,7 @@ export class PDP extends Component {
           this.props.product.prices,
           this.props.product.gallery
         );
+        this.props.toggleAddModal();
       }
     } else {
       this.props.toggleOutOfStockModal();
@@ -132,19 +131,30 @@ export class PDP extends Component {
                                 <label htmlFor='option'>{value}</label>
                               </div>
                             ) : (
-                              <div key={optionsCount}>
-                                <p
-                                  onClick={() =>
-                                    this.pickAttributes(
-                                      name,
-                                      value,
-                                      j,
-                                      this.props.product.attributes
-                                    )
-                                  }
-                                  className='swatch-attribute swatchBoxGridPDP'
+                              <div
+                                key={optionsCount}
+                                className='swatch-button-prop'
+                                onClick={() =>
+                                  this.pickAttributes(
+                                    name,
+                                    value,
+                                    j,
+                                    this.props.product.attributes
+                                  )
+                                }
+                              >
+                                <input
+                                  type='radio'
+                                  id='option'
+                                  name={j}
+                                  value='option'
+                                />
+                                <label
+                                  htmlFor='option'
                                   style={{ background: value }}
-                                ></p>
+                                >
+                                  {''}
+                                </label>
                               </div>
                             );
                           }

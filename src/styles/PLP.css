@@ -218,11 +218,30 @@ body {
   margin: 10px;
   max-height: 50px;
 }
+.swatch-button-prop {
+  position: relative;
+  margin: 10px;
+  /* max-height: 50px; */
+  /* height: 50px;
+  width: 50px; */
+}
 
 
 .button-prop label
 {
   font-size: 16px;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  outline:2px solid darkslategray;
+}
+
+.swatch-button-prop label
+{
+  height: 30px;
+  width: 30px;
   display: block;
   top: 0;
   left: 0;
@@ -238,6 +257,13 @@ body {
   right: 0;
   bottom: 0;
 }
+.swatch-button-prop input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 
 .button-prop input[type="radio"] {
   opacity: 0.011;
@@ -245,13 +271,21 @@ body {
   cursor: pointer;
   border-radius: 2px;
 }
+
+.swatch-button-prop input[type="radio"] {
+  opacity: 0.011;
+  z-index: 100;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
 .button-prop:hover {
   color: silver;
   cursor: pointer;
 }
 .swatch-button-prop:hover {
   cursor: pointer;
-  outline:2px solid red;
+  opacity: 0.7;
 }
 
 .button-prop input[type="radio"]:checked + label {
@@ -262,9 +296,6 @@ body {
   outline:2px solid silver;
 }
 .swatch-button-prop input[type="radio"]:checked + label {
-  background: black;
-  border-radius: 2px;
-  color: white;
   cursor: pointer;
   outline:2px solid goldenrod;
 }
@@ -308,6 +339,26 @@ body {
 
 button{
   cursor: pointer;
+}
+
+.popupPDP {
+  animation: hide 1s 1s forwards;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  outline: 100vmax transparent #ccc;
+  z-index: 14;
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @media screen and (max-width: 1400px) {
