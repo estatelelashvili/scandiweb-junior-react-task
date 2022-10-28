@@ -5,6 +5,7 @@ import { client } from '../gql/queries';
 import { NavBar } from './Navbar';
 import { PLP } from './PLP';
 import { MiniCart } from './MiniCart';
+import { currencySymbolMap } from './CurrencySymbolMap';
 
 export class FrontStore extends Component {
   constructor(props) {
@@ -19,14 +20,14 @@ export class FrontStore extends Component {
     // MyBag: [],
     MyBag: JSON.parse(localStorage.getItem('CartContent')) || [],
     MiniCartIsHidden: true,
-    currencySymbol: '$',
+    currencySymbol: '',
   };
 
   toggleMiniCart() {
     this.setState({ MiniCartIsHidden: !this.state.MiniCartIsHidden });
   }
 
-  handleAddItem = (item, name, costs, images) => {
+  handleAddItem = (item, name, brand, costs, images) => {
     // const { productName, prices, properties, ...rest } = item;
     // const productKeysExist = attributes.map(
     //   ({ ProductId, name, type, items }, j) => Object.keys(items)
@@ -42,6 +43,7 @@ export class FrontStore extends Component {
     //   Object.entries(rest).length === properties.length
     // ) {
     item.productName = name;
+    item.brand = brand;
     item.prices = costs;
     item.imgArr = images;
 
@@ -95,19 +97,21 @@ export class FrontStore extends Component {
               )
             )
             .map((item) => item[0])[0][0],
-          // SelectedCurrency:
+          currencySymbol:
+            currencySymbolMap[
+              result.data.categories
+                .map(({ name, products }) =>
+                  products.map((product) =>
+                    product.prices.map((price) => price.currency.label)
+                  )
+                )
+                .map((item) => item[0])[0][0]
+            ],
         });
       });
   }
 
   SelectCurrency(arg) {
-    const currencySymbolMap = {
-      USD: '$',
-      AUD: 'A$',
-      RUB: '₽',
-      GBP: '£',
-      JPY: '¥',
-    };
     this.setState({
       SelectedCurrency: arg,
       currencySymbol: currencySymbolMap[arg],
@@ -126,6 +130,7 @@ export class FrontStore extends Component {
       <Fragment>
         <NavBar
           data={this.state.data}
+          MyBag={this.state.MyBag}
           filteredData={this.state.data.filter(
             (category) => category.name === this.state.categoryName
           )}
@@ -150,6 +155,7 @@ export class FrontStore extends Component {
           onRemove={this.handleRemoveItem}
           MiniCartIsHidden={this.state.MiniCartIsHidden}
           SelectedCurrency={this.state.SelectedCurrency}
+          currencySymbol={this.state.currencySymbol}
         />
       </Fragment>
     );

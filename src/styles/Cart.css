@@ -32,7 +32,11 @@
   margin: 1px !important;
   width: 100%;
 }
-
+.attribute-title-cart{
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: bolder;
+}
 .attributeNameCart {
   color: blanchedalmond;
   background-color: rgb(56, 55, 55);

@@ -1,40 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import CarouselVertical from './Carousel/CarouselVertical';
-
+import '../styles/PDP.css';
 export class PDP extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      obj: {},
-      // selectedProductAttributes: {},
-    };
-
-    this.handleEvent = this.handleEvent.bind(this);
-    this.handleEventSpecial = this.handleEventSpecial.bind(this);
-    // this.retrieveSelectedProduct = this.retrieveSelectedProduct.bind(this);
   }
-
-  retrieveSelectedProduct(productAttributes) {
-    this.setState({ selectedProductAttributes: productAttributes });
-  }
-  handleEvent = (event) => {
-    console.log(event.target.innerText.toLowerCase());
+  state = {
+    obj: {},
   };
-  handleEventSpecial = (event) => {
-    console.log(event.target.checked);
-  };
-  handleTest(a, b) {
-    this.setState((prevState) => ({
-      obj: {
-        ...prevState.obj,
-        [a]: b,
-      },
-    }));
-  }
 
   pickAttributes = (attribute, value, index, attributes) => {
-    // const currencyMap = { USD: '$', AUD: 'A$', RUB: '₽', GBP: '£', JPY: '¥' };
     this.setState({
       obj: {
         ...this.state.obj,
@@ -43,118 +18,166 @@ export class PDP extends Component {
           [attribute]: value,
         },
         properties: attributes,
-        // imgArr: images,
       },
     });
   };
 
-  combinedFunctions() {
-    const productKeysExist = this.props.product.attributes.map(
-      ({ ProductId, name, type, items }, j) => Object.keys(items)
-    );
-    const { productName, prices, imgArr, properties, ...rest } = this.state.obj;
-    let propertyHolder;
-    if (properties === undefined) {
-      propertyHolder = 404;
-    } else {
-      propertyHolder = properties.length;
-    }
-    if (
-      productKeysExist.length &&
-      (Object.entries(rest).length === 0 ||
-        Object.entries(rest).length !== propertyHolder)
-    ) {
-      alert('Please select all options!');
-    } else {
-      this.props.onAdd(
-        this.state.obj,
-        this.props.product.id,
-        this.props.product.prices,
-        this.props.product.gallery
+  combinedPDPClose() {
+    this.setState({
+      obj: {},
+    });
+    this.props.togglePDP();
+  }
+
+  combinedFunctionsAddProduct() {
+    if (this.props.product.inStock) {
+      const productKeysExist = this.props.product.attributes.map(
+        ({ ProductId, name, type, items }, j) => Object.keys(items)
       );
+      const {
+        productName,
+        brand,
+        prices,
+        imgArr,
+        properties,
+        ...rest
+      } = this.state.obj;
+      let propertyHolder;
+      if (properties === undefined) {
+        propertyHolder = 404;
+      } else {
+        propertyHolder = properties.length;
+      }
+      if (
+        productKeysExist.length &&
+        (Object.entries(rest).length === 0 ||
+          Object.entries(rest).length !== propertyHolder)
+      ) {
+        // alert('Please select all options!');
+        this.props.toggleModal();
+        // this.showModal();
+      } else {
+        this.props.onAdd(
+          this.state.obj,
+          this.props.product.name,
+          this.props.product.brand,
+          this.props.product.prices,
+          this.props.product.gallery
+        );
+      }
+    } else {
+      this.props.toggleOutOfStockModal();
     }
   }
 
   render() {
-    if (this.state.obj.imgArr !== undefined) {
-      console.log(this.state.obj.imgArr[0]);
-    }
-    // localStorage.setItem('CartContent', JSON.stringify(this.props.MyBag));
-    // console.log(JSON.parse(localStorage.getItem('CartContent')) || []);
-
+    let CURR = this.props.SelectedCurrency;
+    let symbol = this.props.currencySymbol;
     return this.props.isShown ? (
-      <div className='PDP-container'>
-        <button
-          className='PDP-close-btn'
-          onClick={() => this.props.togglePDP()}
-        >
-          X
-        </button>
-        <p onClick={this.handleEvent}>{this.props.product.id}</p>
-        {/* <img className='PDP-gallery' src={this.props.product.gallery[0]} /> */}
-        <div className='cartIconPDP'>
-          <CarouselVertical data={this.props.product.gallery} />
+      <Fragment>
+        <div className='allWrapperPDP'>
+          <div className='close-btnPDP'>
+            <button
+              className='close-btnPDP-inner'
+              onClick={() => this.combinedPDPClose()}
+            >
+              &#10060;
+            </button>
+          </div>
+          <div className='cartWrapperPDP'>
+            <div className='cartIconPDP'>
+              <CarouselVertical data={this.props.product.gallery} />
+            </div>
+            <div className='productBrandPDP'>{this.props.product.brand}</div>
+            <div className='productNamePDP'>{this.props.product.name}</div>
+            <div className='itemPricePDP'>
+              <p className='priceTagPDP'>Price:</p>
+              <p className='actualPricePDP'>
+                {symbol}
+                {
+                  this.props.product.prices.filter(
+                    (x) => x.currency.label === CURR
+                  )[0].amount
+                }
+              </p>
+            </div>
+            {this.props.product.attributes.map(
+              ({ ProductId, name, type, items }, j) => {
+                return (
+                  <Fragment key={ProductId}>
+                    <div className='attributeContainerPDP'>
+                      <div key={ProductId} className='button-prop-container'>
+                        <p className='attributeTitlePDP'>{name}:</p>
+                        {items.map(
+                          ({ displayValue, value, id }, optionsCount) => {
+                            return type === 'text' ? (
+                              <div
+                                key={optionsCount}
+                                className='button-prop'
+                                onClick={() =>
+                                  this.pickAttributes(
+                                    name,
+                                    value,
+                                    j,
+                                    this.props.product.attributes
+                                  )
+                                }
+                              >
+                                <input
+                                  type='radio'
+                                  id='option'
+                                  name={j}
+                                  value='option'
+                                />
+                                <label htmlFor='option'>{value}</label>
+                              </div>
+                            ) : (
+                              <div key={optionsCount}>
+                                <p
+                                  onClick={() =>
+                                    this.pickAttributes(
+                                      name,
+                                      value,
+                                      j,
+                                      this.props.product.attributes
+                                    )
+                                  }
+                                  className='swatch-attribute swatchBoxGridPDP'
+                                  style={{ background: value }}
+                                ></p>
+                              </div>
+                            );
+                          }
+                        )}
+                      </div>
+                    </div>
+                  </Fragment>
+                );
+              }
+            )}
+            <div
+              className='dangerouslySetInnerHTML'
+              dangerouslySetInnerHTML={{
+                __html: this.props.product.description,
+              }}
+            />
+            <div className='addBtnCPDP'>
+              <button
+                className='addBtnPDP'
+                onClick={() => this.combinedFunctionsAddProduct()}
+              >
+                add to cart
+              </button>
+            </div>
+            {/* <button
+            className='PDP-add-to-cart'
+            onClick={() => this.combinedFunctions()}
+          >
+            Add to Cart
+          </button> */}
+          </div>
         </div>
-        {this.props.product.attributes.map(
-          ({ ProductId, name, type, items }, j) => {
-            return (
-              <div key={ProductId} className='button-prop-container'>
-                {/* <ul className='property-option'> */}
-                <p>{name}:</p>
-                {items.map(({ displayValue, value, id }, optionsCount) => {
-                  return type === 'text' ? (
-                    <div
-                      key={optionsCount}
-                      className='button-prop'
-                      // className='text-attribute'
-                      onClick={() =>
-                        this.pickAttributes(
-                          name,
-                          value,
-                          j,
-                          this.props.product.attributes
-                        )
-                      }
-                    >
-                      <input type='radio' id='option' name={j} value='option' />
-                      <label htmlFor='option'>{value}</label>
-                    </div>
-                  ) : (
-                    <div key={id}>
-                      <p
-                        onClick={() =>
-                          this.pickAttributes(
-                            name,
-                            value,
-                            j,
-                            this.props.product.attributes
-                          )
-                        }
-                        className='swatch-attribute'
-                        style={{ background: value }}
-                      ></p>
-                    </div>
-                  );
-                })}
-                {/* </ul> */}
-              </div>
-            );
-          }
-        )}
-        <button
-          className='PDP-add-to-cart'
-          onClick={() =>
-            //   this.props.onAdd(
-            //     this.state.obj,
-            //     this.props.product.id,
-            //     this.props.product.prices,
-            //   )
-            this.combinedFunctions()
-          }
-        >
-          Add to Cart
-        </button>
-      </div>
+      </Fragment>
     ) : (
       ''
     );

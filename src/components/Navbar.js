@@ -5,11 +5,7 @@ import '../styles/MiniCart.css';
 
 export class NavBar extends Component {
   render() {
-    let badgeNum = 70;
-    // const testValue = this.props.data.map((category) => category.name)[0];
-    // const testValue = this.props.data.map(({ name, products }) => name)[0];
-    // const testValue = this.props.data[0];
-    // console.log(testValue);
+    let badgeNum = this.props.MyBag.length;
     return (
       <header>
         <nav>
@@ -40,12 +36,6 @@ export class NavBar extends Component {
                     <span className='cartImg badge'>{badgeNum}</span>
                   </span>
                 </div>
-                {/* <img
-                  className='cart-icon'
-                  src=''
-                  alt='not found'
-                  onClick={() => this.props.toggleMiniCart()}
-                /> */}
               </div>
             </li>
           </ul>

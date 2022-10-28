@@ -5,25 +5,78 @@
   background-color: #eee;
   right: 4%;
   top: 1%;
-  width: 245px;
+  width: 265px;
   height: auto;
   max-height: 70%;
   font-size: 8px;
   z-index: 10;
   overflow: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .cartWrapper {
   background-color: white;
-  display: grid;
-  grid-template-columns: 2.2fr 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   margin-top: 1em;
   padding-bottom: 2em;
-  grid-column: 1/4;
+}
+.cart-wrapper-main{
+  display: flex;
+  width: 220px;
+}
+.mini-cart-intro-container{
+  display: flex;
+  flex-direction: column;
+  height: 70px;
+  justify-content: space-evenly;
+  font-weight: bolder;
+  font-size: 10px;
+  margin: auto;
+  align-self: flex-start;
 }
 
+.btn-trio-mini-cart{
+  display: flex;
+  flex-direction: column;
+  justify-content:  space-between;
+  align-items: flex-end;
+  margin-right: 5px;
+  font-weight: bolder;
+  font-size: 10px;
+}
+
+.btn-trio-mini-cart button{
+  height: 15px;
+  width: 15px;
+  font-size: 15px;
+  font-weight: bolder;
+ line-height: 0%;
+}
+
+.item-counter{
+  width: 16px;
+  text-align: center;
+}
+
+.mini-cart-img{
+  width: 75px;
+  height: 75px;
+}
 .cartWrapper > div {
   padding: 5px;
+}
+
+.prop-container{
+  display: flex;
+  margin-top: 15px;
+  margin-left: 25px;
+}
+
+.prop-container p{
+  margin-right: 5px;
 }
 
 .attributeContainer {
@@ -217,6 +270,7 @@
   margin-left: 110px;
   margin-right: 10px;
   align-self: end;
+  font-weight: bolder;
 }
 
 hr.lineRC {
@@ -231,4 +285,38 @@ hr.lineRC {
 
 .mini-cart-container{
   position: relative;
+}
+
+/* SWATCH */
+.swatch-attribute{
+  width: 20px;
+  height: 20px;
+  border: 1px solid lightgray;
+}
+
+.text-attribute{
+  color: black;
+  width: fit-content;
+  height: fit-content;
+  border: 1px solid silver;
+  font-weight: bolder;
+  font-size: 10px;
+  padding: 2px;
+}
+
+.selected-attribute{
+  color: green;
+  width: fit-content;
+  height: fit-content;
+  border: 2px solid silver;
+  color: white;
+  background: black;
+  font-weight: bolder;
+  font-size: 10px;
+  padding: 2px;
+}
+.selected-attribute-swatch{
+  width: 20px;
+  height: 20px;
+  border: 2px solid red;
 }

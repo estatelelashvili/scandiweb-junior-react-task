@@ -7,12 +7,16 @@
   font-family: Raleway, sans-serif;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
 /* NAVBAR  */
 
 header {
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   background: whitesmoke;
   color: black;
   font-size: 14px;
@@ -62,6 +66,7 @@ nav  ul  li  a:hover {
   width: 20px;
   height: 20px;
   border: 1px solid silver;
+  margin-right: 5px;
 }
 
 .text-attribute{
@@ -69,6 +74,7 @@ nav  ul  li  a:hover {
   width: fit-content;
   height: fit-content;
   border: 1px solid silver;
+  margin-right: 5px;
 }
 
 .selected-attribute{
@@ -76,20 +82,20 @@ nav  ul  li  a:hover {
   width: fit-content;
   height: fit-content;
   border: 2px solid red;
+  margin-right: 5px;
 }
 .selected-attribute-swatch{
   width: 20px;
   height: 20px;
   border: 2px solid red;
+  margin-right: 5px;
 }
 
 
 
 
 
-.mini-cart-img{
-  width: 75px;
-}
+
 
 /* SELECT OPTIONS */
 
@@ -98,65 +104,7 @@ nav  ul  li  a:hover {
   border: 2px solid red;
 }
 
-.button-prop-container {
-  width: fit-content;
-  display: flex;
-  justify-content: space-between;
-  /* margin-left: 20px; */
-}
 
-.button-prop {
-  position: relative;
-  margin: 10px;
-}
-
-.button-prop label
-{
-  font-size: 20px;
-  display: block;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  outline:2px solid darkslategray;
-}
-
-.button-prop input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.button-prop input[type="radio"] {
-  opacity: 0.011;
-  z-index: 100;
-  cursor: pointer;
-  border-radius: 2px;
-}
-.button-prop:hover {
-  background-color: lightgrey;
-  color: darkgray;
-  cursor: pointer;
-}
-
-.button-prop input[type="radio"]:checked + label {
-  background: black;
-  border-radius: 2px;
-  color: white;
-  cursor: pointer;
-  outline:2px solid silver;
-}
-
-.button-prop label {
-  padding-left: 8px;
-  padding-right: 8px;
-  cursor: pointer;
-  z-index: 90;
-  line-height: 1.8em;
-  border-radius: 2px;
-}
 
 
 .PDP-container{
@@ -213,13 +161,13 @@ nav  ul  li  a:hover {
   position: relative;
 }
 .carouselCart {
-  position: absolute;
+  /* position: absolute; */
   margin-top: -20px;
   display: flex;
   width: 70px;
   height: 70px;
-  top: 10%;
-  left: 50%;
+  /* top: 10%;
+  left: 50%; */
 }
 
 .parentH {
@@ -255,8 +203,9 @@ nav  ul  li  a:hover {
   font-size: 15px;
   font-weight: bolder;
   /* color: rgb(80, 80, 80); */
-  color: red;
+  color: silver;
   text-transform: uppercase;
+  cursor: pointer;
 }
 #errowLeft {
   position: absolute;
@@ -267,8 +216,9 @@ nav  ul  li  a:hover {
   font-size: 15px;
   font-weight: bolder;
   /* color: rgb(80, 80, 80); */
-  color: red;
+  color: silver;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .currency-switcher {
