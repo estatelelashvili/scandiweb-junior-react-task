@@ -4,7 +4,6 @@ import { GET_PRODUCTS } from '../gql/queries';
 import { client } from '../gql/queries';
 import { NavBar } from './Navbar';
 import { PLP } from './PLP';
-import { MiniCart } from './MiniCart';
 import { currencySymbolMap } from './CurrencySymbolMap';
 
 export class FrontStore extends Component {
@@ -17,7 +16,6 @@ export class FrontStore extends Component {
     data: [],
     categoryName: '',
     SelectedCurrency: '',
-    // MyBag: [],
     MyBag: JSON.parse(localStorage.getItem('CartContent')) || [],
     MiniCartIsHidden: true,
     currencySymbol: '',
@@ -28,20 +26,6 @@ export class FrontStore extends Component {
   }
 
   handleAddItem = (item, name, brand, costs, images) => {
-    // const { productName, prices, properties, ...rest } = item;
-    // const productKeysExist = attributes.map(
-    //   ({ ProductId, name, type, items }, j) => Object.keys(items)
-    // );
-    // console.log(productKeysExist.length);
-    // console.log(properties);
-    // const currencyMap = { USD: '$', AUD: 'A$', RUB: '₽', GBP: '£', JPY: '¥' };
-    // item.symbol = currencyMap[currency];
-
-    // if (
-    //   properties !== undefined &&
-    //   rest !== undefined &&
-    //   Object.entries(rest).length === properties.length
-    // ) {
     item.productName = name;
     item.brand = brand;
     item.prices = costs;
@@ -52,10 +36,6 @@ export class FrontStore extends Component {
     this.setState({ MyBag: allProducts });
 
     localStorage.setItem('CartContent', JSON.stringify(this.state.MyBag));
-    // }
-    // else {
-    //   alert('Please select all options!');
-    // }
   };
 
   handleRemoveItem = (item) => {
@@ -120,12 +100,9 @@ export class FrontStore extends Component {
 
   componentDidMount() {
     this.getProducts();
-    // localStorage.setItem('CartItems', JSON.stringify({ total: 999 }));
   }
   render() {
-    // localStorage.setItem('CartContent', JSON.stringify({}));
     localStorage.setItem('CartContent', JSON.stringify(this.state.MyBag));
-    // console.log(JSON.parse(localStorage.getItem('CartContent')) || []);
     return (
       <Fragment>
         <NavBar
@@ -139,12 +116,6 @@ export class FrontStore extends Component {
           toggleMiniCart={this.toggleMiniCart}
           SelectCurrency={(e) => this.SelectCurrency(e)}
         />
-        {/* <MiniCart
-          MiniCartIsHidden={this.state.MiniCartIsHidden}
-          MyBag={this.state.MyBag}
-          onAdd={this.handleAddItem}
-          onRemove={this.handleRemoveItem}
-        /> */}
         <PLP
           filteredData={this.state.data.filter(
             (category) => category.name === this.state.categoryName
@@ -156,6 +127,7 @@ export class FrontStore extends Component {
           MiniCartIsHidden={this.state.MiniCartIsHidden}
           SelectedCurrency={this.state.SelectedCurrency}
           currencySymbol={this.state.currencySymbol}
+          toggleMiniCart={this.toggleMiniCart}
         />
       </Fragment>
     );

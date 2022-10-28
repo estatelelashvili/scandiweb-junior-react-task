@@ -65,6 +65,7 @@ export class PLP extends Component {
                 onRemove={this.props.onRemove}
                 SelectedCurrency={this.props.SelectedCurrency}
                 currencySymbol={this.props.currencySymbol}
+                toggleMiniCart={this.props.toggleMiniCart}
                 // productAttributes={this.state.selectedProductAttributes}
               />
               <h1 className='categoryName'>{name}</h1>

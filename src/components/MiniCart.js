@@ -159,22 +159,19 @@ export class MiniCart extends Component {
 
           <button
             className='checkOutBTN'
-            // onClick={() => this.props.handlePopupClick()}
+            onClick={() => this.props.toggleMiniCart()}
           >
             check out
           </button>
         </div>
         <Cart
           cartIsShown={this.state.cartIsShown}
-          // MiniCartIsHidden={this.props.MiniCartIsHidden}
           toggleCart={this.toggleCart}
           MyBag={this.props.MyBag}
           onAdd={this.props.onAdd}
           onRemove={this.props.onRemove}
           SelectedCurrency={this.props.SelectedCurrency}
-          // productAttributes={this.state.selectedProductAttributes}
         />
-        {/* <p>Total {TOTAL}</p> */}
       </div>
     );
   }
